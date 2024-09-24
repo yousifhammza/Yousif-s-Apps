@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد نبذة مختصرة للكتاب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/bkdescr.css">
+</head>
+<body>
+    <!-- حاوية رسائل التنبيه -->
+    <div id="notification-container"></div>
+
+    <!-- نافذة التأكيد -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>تأكيد رفع الصورة</h2>
+            <p>خاصية تحويل الصورة إلى نص قد لا تعمل بصورة جيدة. نفضل استخدام Google Lens أو نسخ ولصق جدول المحتويات يدويًا. هل ترغب في المتابعة لرفع الصورة؟</p>
+            <div class="modal-buttons">
+                <button class="confirm-button" onclick="confirmUpload()">موافق</button>
+                <button class="cancel-button" onclick="closeModal()">إلغاء</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>مولد نبذة مختصرة للكتاب</h1>
+        <div class="content">
+            <div class="form-section">
+                <div class="input-group">
+                    <label for="bookName">اسم الكتاب:</label>
+                    <input type="text" id="bookName" placeholder="أدخل اسم الكتاب">
+                </div>
+                <div class="input-group">
+                    <label for="authorName">اسم المؤلف:</label>
+                    <input type="text" id="authorName" placeholder="أدخل اسم المؤلف">
+                </div>
+                <div class="input-group">
+                    <label for="toc">جدول المحتويات:</label>
+                    <textarea id="toc" rows="6" placeholder="أدخل جدول محتويات الكتاب هنا او قم برفع صورة للمحتويات"></textarea>
+                </div>
+                <div class="file-upload">
+                    <label for="tocImage" class="upload-button" onclick="handleUploadClick(event)"> 
+                          <i class="fas fa-upload"></i>  رفع صورة  
+                     </label> 
+                    <input type="file" id="tocImage" accept="image/*" onchange="handleFileUpload(event)">
+                    <span class="file-name" id="fileName"></span>
+                </div>
+                <button onclick="generateTexts()">توليد النبذة</button>
+                <div class="progress-bar">
+                    <div class="progress" id="progressBar"></div>
+                </div>
+            </div>
+            <div class="result-section" id="resultSection" style="display:none;">
+                <h2>النبذة المختصرة:</h2>
+                <p id="summary"></p>
+                <button class="copy-button" onclick="copySummary()">
+                    <i class="fas fa-copy"></i> نسخ النص
+                </button>
+            </div>
+        </div>
+
+        <!-- زر الرجوع -->
+        <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> العودة للصفحة الرئيسية</a>
+
+        <!-- حقوق الملكية -->
+        <div class="copyright">
+            <p>Developed by: Yousif Hamza</p>
+        </div>
+
+
+    </div>
+
+    <script type="importmap">
+    {
+        "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+    }
+    </script>
+
+    <script type="module" src="js/bkdescr.js"></script>
+</body>
+</html>

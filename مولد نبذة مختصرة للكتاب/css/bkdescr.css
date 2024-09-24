@@ -1,0 +1,318 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --background-color: rgba(236, 240, 241, 0.9); /* شفافية 0.9 */
+    --text-color: #2c3e50;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --notification-success: #2ecc71;
+    --notification-error: #e74c3c;
+    --notification-info: #3498db;
+    --modal-background: rgba(0, 0, 0, 0.5);
+    --modal-content-background: #ffffff;
+    --modal-header-color: var(--primary-color);
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: url('../images/photo\ day.JPG') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: var(--background-color);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--box-shadow);
+    max-width: 900px;
+    width: 100%;
+}
+
+h1 {
+    color: #000;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.form-section, .result-section {
+    flex: 1;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.upload-button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.upload-button i {
+    margin-right: 5px;
+}
+
+.file-upload input[type="file"] {
+    display: none;
+}
+
+.file-name {
+    margin-left: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+.copy-button {
+    background-color: var(--secondary-color);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.copy-button i {
+    margin-left: 5px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.progress {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.result-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.result-section h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+#summary {
+    line-height: 1.6;
+    white-space: pre-wrap;
+    direction: rtl;
+    font-family: 'Tajawal', sans-serif;
+}
+
+/* تنسيقات رسائل التنبيه */
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.notification {
+    min-width: 250px;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification.success {
+    background-color: var(--notification-success);
+}
+
+.notification.error {
+    background-color: var(--notification-error);
+}
+
+.notification.info {
+    background-color: var(--notification-info);
+}
+
+.notification i {
+    margin-left: 10px;
+}
+
+/* تنسيقات نافذة التأكيد */
+.modal {
+    display: none; /* مخفي افتراضيًا */
+    position: fixed;
+    z-index: 2000; /* فوق رسائل التنبيه */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-background); /* خلفية شفافة */
+}
+
+.modal-content {
+    background-color: var(--modal-content-background);
+    margin: 15% auto; /* 15% من الأعلى ومركز أفقيًا */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    position: relative;
+    text-align: center;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.confirm-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.cancel-button {
+    background-color: #aaa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: #888;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 16px;
+    transition: color 0.3s;
+    direction: ltr;
+    text-align: center; /* توسيط النص داخل العنصر */
+    width: 100%; /* إذا كان الهدف توسيط العنصر بالكامل */
+}
+
+.copyright {
+    font-size: xx-small;
+    margin-top: 10px;
+    text-align: center; /* توسيط النص */
+}
